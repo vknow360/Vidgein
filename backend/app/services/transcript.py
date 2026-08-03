@@ -4,7 +4,6 @@ from youtube_transcript_api import (
     YouTubeTranscriptApi,
     TranscriptsDisabled,
     NoTranscriptFound,
-    NoTranscriptAvailable,
     CouldNotRetrieveTranscript,
 )
 
@@ -45,8 +44,6 @@ def get_transcript(video_id: str):
     except NoTranscriptFound:
         # No transcript in any language
         raise HTTPException(400, "No transcript found for this video")
-    except NoTranscriptAvailable:
-        raise HTTPException(400, "No transcript available for this video")
     except CouldNotRetrieveTranscript as e:
         # Catch-all for other transcript errors
         raise HTTPException(400, f"Could not retrieve transcript: {e}")
