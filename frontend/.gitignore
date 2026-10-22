@@ -1,4 +1,10 @@
 node_modules
+dist
+.cache
+coverage
+*.log
+.eslintcache
+.turbo
 
 # Output
 .output

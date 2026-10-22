@@ -6,6 +6,7 @@ from youtube_transcript_api import (
     NoTranscriptFound,
     CouldNotRetrieveTranscript,
 )
+import chunking
 
 ytt_api = YouTubeTranscriptApi()
 
@@ -36,8 +37,8 @@ def extract_video_id(url: str) -> str:
 
 def get_transcript(video_id: str):
     try:
-        transcript = ytt_api.fetch(video_id=video_id)
-        return transcript.to_raw_data()
+        vid_transcript = ytt_api.fetch(video_id=video_id)
+        return vid_transcript.to_raw_data()
     except TranscriptsDisabled:
         # Video owner disabled transcripts
         raise HTTPException(400, "Transcripts are disabled for this video")
