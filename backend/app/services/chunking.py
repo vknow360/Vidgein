@@ -5,8 +5,8 @@ def process_chunk(chunk: list[dict]) -> dict:
     end_time = chunk[-1]['start'] + chunk[-1]['duration']
     content = " ".join(s['text'] for s in chunk)
     return {
-        "start": start_time,
-        "end": end_time,
+        "start": round(start_time, 2),
+        "end": round(end_time, 2),
         "content": content
     }
 
@@ -29,3 +29,11 @@ def chunk_transcript(segments: list, window_seconds: float = 120.0, overlap_seco
     if curr_chunk:
         chunks.append(process_chunk(curr_chunk))
     return chunks
+
+def format_timestamp(seconds: float) -> str:
+    hours = int(seconds // 3600)
+    minutes = int((seconds % 3600) // 60)
+    seconds = int(seconds % 60)
+    if hours > 0:
+        return f"{hours:02d}:{minutes:02d}:{seconds:02d}"
+    return f"{minutes:02d}:{seconds:02d}"
