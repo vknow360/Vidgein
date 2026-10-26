@@ -6,7 +6,6 @@ from youtube_transcript_api import (
     NoTranscriptFound,
     CouldNotRetrieveTranscript,
 )
-import chunking
 
 ytt_api = YouTubeTranscriptApi()
 
@@ -48,5 +47,3 @@ def get_transcript(video_id: str):
     except CouldNotRetrieveTranscript as e:
         # Catch-all for other transcript errors
         raise HTTPException(400, f"Could not retrieve transcript: {e}")
-
-print(chunking.chunk_transcript(get_transcript("dQw4w9WgXcQ")))

@@ -8,5 +8,8 @@ def get_embeddings():
     if not _embeddings:
         _embeddings = HuggingFaceEmbeddings(
             model_name=config.EMBEDDINGS_MODEL,
+            model_kwargs={
+                "device": "cpu"
+            }
         )
     return _embeddings
